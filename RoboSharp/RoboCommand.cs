@@ -163,7 +163,7 @@ namespace RoboSharp
             }
         }
 
-        public void Start(string domain = "", string username = "", string password = "")
+        public void Start()
         {
             hasError = false;
 
@@ -208,23 +208,6 @@ namespace RoboSharp
             backupTask = Task.Run(() =>
             {
                 process = new Process();
-                
-                if (!string.IsNullOrEmpty(domain))
-                    process.StartInfo.Domain = domain;
-
-                if (!string.IsNullOrEmpty(username))
-                    process.StartInfo.UserName = username;
-
-                if (!string.IsNullOrEmpty(password))
-                {
-                    var ssPwd = new System.Security.SecureString();
-                    for (int x = 0; x < password.Length; x++)
-                    {
-                        ssPwd.AppendChar(password[x]);
-                    }
-                    process.StartInfo.Password = ssPwd;
-                }
-                
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;
